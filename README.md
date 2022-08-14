@@ -132,6 +132,9 @@ The Pad by default send Midi Note data when played and pressure sensetive after 
 
 This device really is a dumb device. To my knowledge there is no mode to set the pads in to automatically do this. Feedback si welcomed. I did however figure out the sysex messages for the pads and how to send them to the device to mimic this behavior.
 
+* Pad Numbers in code start at 0 and go to 15. So Pad 1 on the device, in code, is actually PAD 0. Thats how it is addressed in sysex messages too. Pad 1 in sysex code is *00*
+
+
 ### PAD LED Sysex break down
 Sysex data is sent in hex bytes ranging from 0-127 with start bytes and end bytes. Here is the PAD Color Code
 
@@ -146,32 +149,32 @@ The above sysex message will turn Pad 0 to a bright red. The device will accept 
 With the knowledge of how the Pad leds work and a little python skill, I have created a replica program that allows me to play the pads and get LED feedback in the color of my choosing. You would think that all the traffic back and forth from the computer would introduce latency with the LED response, buts not the case at all.
 
 ### PAD Led Sysex Cheat
-Not all combination are here. Change the RGB values to get what you want.
+Not all combination are here. Change the RGB values to get what you want. **Note. This chart is in HEXADECIMAL**
 | Msg Start | Mfg ID | Dev ID | Model Id | Msg Type | Data Length | Data Length2 | Pad # | Red(0-127) | Green(0-127) | Blue(0-127) | Msg End |
 | --------- | ------ | ------ | -------- | -------- | ----------- | ------------ | ----- | ---------- | ------------ | ----------- | ------- |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 00     | 7F         | 0            | 0           | F7      |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 01     | 7F         | 0            | 0           | F8      |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 02     | 7F         | 0            | 0           | F9      |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 03     | 7F         | 0            | 0           | F10     |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 04     | 7F         | 0            | 0           | F11     |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 05     | 7F         | 0            | 0           | F12     |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 06     | 7F         | 0            | 0           | F13     |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 07     | 7F         | 0            | 0           | F14     |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 08     | 7F         | 0            | 0           | F15     |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 09     | 7F         | 0            | 0           | F16     |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 0A    | 7F         | 0            | 0           | F17     |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 0B    | 7F         | 0            | 0           | F18     |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 0C    | 7F         | 0            | 0           | F19     |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 0D    | 7F         | 0            | 0           | F20     |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 0E    | 7F         | 0            | 0           | F21     |
-| F0        | 47     | 47     | 4A       | 65       | 0           | 4            | 0F    | 7F         | 0            | 0           | F22     |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 00     | 7F         | 00            | 00           | F7      |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 01     | 7F         | 00            | 00           | F8      |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 02     | 7F         | 00            | 00           | F9      |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 03     | 7F         | 00            | 00           | F10     |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 04     | 7F         | 00            | 00           | F11     |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 05     | 7F         | 00            | 00           | F12     |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 06     | 7F         | 00            | 00           | F13     |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 07     | 7F         | 00            | 00           | F14     |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 08     | 7F         | 00            | 00           | F15     |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 09     | 7F         | 00            | 00           | F16     |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 0A    | 7F         | 00            | 00           | F17     |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 0B    | 7F         | 00            | 00           | F18     |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 0C    | 7F         | 00            | 00           | F19     |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 0D    | 7F         | 00            | 00           | F20     |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 0E    | 7F         | 00            | 00           | F21     |
+| F0        | 47     | 47     | 4A       | 65       | 00           | 04            | 0F    | 7F         | 00            | 00           | F22     |
 
 
 ### Pad Note Chart
 Here are the Pad notes. When you strike a pad, these are the note values that are sent to the host.
 
 | Pad Number | Midi Note | Pad Number Code | Midi Note Value |
-| ---------- | --------- | --------------- | --------------- |
+| ---------- | --------- | --------------- | --------------- |s
 | 1          | C#1       | 0               | 37              |
 | 2          | C1        | 1               | 36              |
 | 3          | F#1       | 2               | 42              |
