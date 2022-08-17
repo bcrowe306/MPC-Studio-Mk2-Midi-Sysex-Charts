@@ -174,7 +174,7 @@ Not all combination are here. Change the RGB values to get what you want. **Note
 Here are the Pad notes. When you strike a pad, these are the note values that are sent to the host.
 
 | Pad Number | Midi Note | Pad Number Code | Midi Note Value |
-| ---------- | --------- | --------------- | --------------- |s
+| ---------- | --------- | --------------- | --------------- |
 | 1          | C#1       | 0               | 37              |
 | 2          | C1        | 1               | 36              |
 | 3          | F#1       | 2               | 42              |
