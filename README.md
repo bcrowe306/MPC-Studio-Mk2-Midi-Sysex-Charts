@@ -49,7 +49,7 @@ Here is a full breakdown of the button Note and CC values.
 | Quantize              | 1       | 12        | C0   | 12     | RED/WHITE        |
 | Track Select          | 1       | 13        | C# 0 | 13     | RED/WHITE        |
 | Program Select        | 1       | 14        | D0   | 14     | RED/WHITE        |
-| TC ON/OFF             | 1       | 15        | Eb 0 | 15     | RED/WHITE        |
+| TC ON/OFF             | 1       | 15        | Eb 0 | 15     | WHITE            |
 | Sample Start          | 1       | 33        | A1   | 33     | RED/WHITE        |
 | Sample End            | 1       | 34        | Bb1  | 34     | RED/WHITE        |
 | Pad Bank A/E          | 1       | 35        | B1   | 35     | RED/WHITE        |
