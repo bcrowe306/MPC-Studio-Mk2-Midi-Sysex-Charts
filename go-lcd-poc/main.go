@@ -179,20 +179,20 @@ func write_to_screen(out_port *drivers.Out, image_data *image.RGBA) error {
 			fmt.Printf("ERROR: %s", err)
 			return err
 		}
-		encodedBuffer := encodePNG(chunk_buffer_bytes)
+		encodedBuffer := encode_png(chunk_buffer_bytes)
 		send_sysex_msg(out_port, chunk, len(chunk_buffer_bytes), len(encodedBuffer), &encodedBuffer)
 	}
 	return nil
 }
-func encodePNG(originalBuffer []byte) []byte {
-	var encodedBuffer []byte
+func encode_png(original_png_buffer []byte) []byte {
+	var encode_png_buffer []byte
 	stride := 7
-	for i := 0; i < len(originalBuffer); i += stride {
+	for i := 0; i < len(original_png_buffer); i += stride {
 		end := i + stride
-		if end > len(originalBuffer) {
-			end = len(originalBuffer)
+		if end > len(original_png_buffer) {
+			end = len(original_png_buffer)
 		}
-		group := originalBuffer[i:end]
+		group := original_png_buffer[i:end]
 		controlByte := 0
 
 		for j := 0; j < len(group); j++ {
@@ -201,10 +201,10 @@ func encodePNG(originalBuffer []byte) []byte {
 				group[j] -= 128
 			}
 		}
-		encodedBuffer = append(encodedBuffer, byte(controlByte))
-		encodedBuffer = append(encodedBuffer, group...)
+		encode_png_buffer = append(encode_png_buffer, byte(controlByte))
+		encode_png_buffer = append(encode_png_buffer, group...)
 	}
-	return encodedBuffer
+	return encode_png_buffer
 }
 func list_midi_ports() {
 	for inPortIndex := range midi.GetInPorts() {

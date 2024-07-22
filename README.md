@@ -203,3 +203,98 @@ Here are the Pad notes. When you strike a pad, these are the note values that ar
 | 14         | G2        | 13              | 55              |
 | 15         | D#        | 14              | 51              |
 | 16         | F2        | 15              | 53              |
+
+# LCD Screen
+We have finally figured out how to operate the LCD Screen on the MPC Studio Mk2. Thanks to [@gstepniewski](https://github.com/gstepniewski) and [@BlackBinary](https://github.com/BlackBinary) for their help in reverse engineering the LCD Screen
+
+## Overview
+The LCD screen works by sending 160x80 pixel PNG encoded images via SYSEX midi messages. However, it is not as simple as sending the bytes of a PNG message in a Sysex message after the header. The PNG must first be encoded to a format that is transmissible via MIDI. MIDI bytes are limited to 7bit, where as most modern image formats start at 8 bit/1byte values. 
+
+Also, the image is not sent as one complete 160x80 png file. The image must be broken up into chunks. Each chunk is it's own png file and then encoded for transmission via MIDI. A sysex header and metadata is generated per chunk, and the message is sent to the device.
+
+Each chunk has specified coordinates of the total image.
+
+![alt](image1.png)
+
+The X,Y coordinates for the chunks are listed below as X1, Y1, X2, Y2:
+
+```
+X1:0,   Y1: 0,  X2: 60,  Y2: 60
+X1:0,   Y1: 60, X2: 60,  Y2: 80
+X1:60,  Y1: 0,  X2: 120, Y2: 60
+X1:60,  Y1: 60, X2: 120, Y2: 80
+X1:120, Y1: 0,  X2: 160, Y2: 60
+X1:120, Y1: 60, X2: 160, Y2: 80
+```
+
+The next obstacle to overcome is the Sysex header file and metadata per image. Each chunk sent must include metadata about the image chunk being sent. The formula for the generating the metatdata is listed below is sequence of bytes.
+
+### Sysex LCD Chunk Header
+
+| index |  value(hex)    | description                   |
+| --    | --        | --                            |
+| 0     | 0xF0 | Sysex Start Message|
+| 1     | 0x47 | Manufacturer ID|
+| 2     | 0x7F | Device ID|
+| 3     | 0x4A | Model ID |
+| 4     | 0x04 | Message ID |
+
+
+### Sysex LCD Chunk Metadata
+| index |  value(hex)    | description                   |
+| --    | --        | --                            |
+| 5-6   | *0x00, 0x00* (Calculated per chunk)| XX XX (2 bytes) Size of the sysex encoded png message size plus the header size in bytes(16) + a magic number in lsb(least Significant Byte) with the high byte first|
+| 7-8   | 0x00 0x20 or 0x00 0x20 if payload >= 128 (Calculated per chunk) | (2 byte) If 20, add 128 to payload size. This byte depends on the payload size metadata which is calculated later|
+| 9-12  | *(0x00, 0x00, 0x00, 0x00)* 4 Bytes (Calculated per chunk)  |XX 00 YY 00 (4 bytes)	X / Y Starting X/Y coordinates of the chunk |
+| 13-14  | *(0x00, 0x00)* 4 Bytes (Calculated per chunk)  |Size of the image chunk png (decoded to png!), but the bytes are swapped (so 1 byte is encoded as 01 00) in lsb(least Significant Byte) with the low byte first. This size determines the byte order for index 7-8.|
+
+### Sysex LCD Chunk Payload.
+The payload for the sysex chunk is an PNG image complete with standard PNG image headers, compression data, etc. Essentially, everything related to a PNG file is in the payload. The only difference is that we must encode the PNG data in 7bit representation, which means we must do some bit shifting to make this possible. 
+
+The developers at Akai chose to use a control byte for every 7 bytes. This allows them to encode values greater than 127(0x7F) in the sysex message. The process is to loop over the bytes in sets of 7 in the PNG image. If the byte is larger than 127, the control bit is set to 1 and then shifted into position of the byte in the group of 7. The byte that was larger has 128 subtracted from it. Once the the group of 7 is complete, the control byte is pushed to a new buffer, followed by the 7 bytes, and the process continues for the next 7 bytes. Here is the logic implementation in Go:
+
+```go
+func encode_png(original_png_buffer []byte) []byte {
+	var encode_png_buffer []byte
+	stride := 7
+	for i := 0; i < len(original_png_buffer); i += stride {
+		end := i + stride
+		if end > len(original_png_buffer) {
+			end = len(original_png_buffer)
+		}
+		group := original_png_buffer[i:end]
+		control_byte := 0
+
+		for j := 0; j < len(group); j++ {
+			if group[j] >= 128 {
+				control_byte |= 1 << j
+				group[j] -= 128
+			}
+		}
+		encode_png_buffer = append(encode_png_buffer, byte(control_byte))
+		encode_png_buffer = append(encode_png_buffer, group...)
+	}
+	return encode_png_buffer
+}
+```
+
+This will encode the PNG chunk to a format that can be sent via sysex. The same logic can be implemented in any language of your choosing. 
+
+### Sysex Complete Message
+Once the header, metadata, and payload have been generated, you can now concatenate the three sections, and append it with the sysex end byte (0xF7), and send it to the MPC Studio Mk2
+
+```go
+var msg []byte
+msg = append(msg, header...)
+msg = append(msg, metadata...)
+msg = append(msg, payload...)
+msg = append(msg, byte(0xF7))
+```
+This process will be done 6 times per frame sent to the device. There is no need to refresh the screen with a frame rate. The image will be displayed until you send another image, reset the device, or another programs takes control.
+
+### POC (Proof of Concept)
+Included in this repository are two POCs as demos of the screen being controlled by custom code. The first is in Javascript, using the sharp library and showing white noise on the screen. The second is in Go using mostly native imaging capabilities, and shows the control values as you press buttons on the device.
+
+I'll be working on a Python, and C++ implementation POC for the LCD Screen as well.
+
+This can be implemented in any programming language that supports midi, and imaging to some degree. Most of the performant imaging libraries are written on lower level languages, so it will be difficult to incorporate the screen in our custom MIDI scripts in the DAW. Most of the scripting environments don't allow to import libraries with C/C++ bindings.
