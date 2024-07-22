@@ -1,0 +1,225 @@
+controls:
+  - name: Touch Strip Button
+    status: 144
+    channel: 0
+    data1: 0
+  - name: Pad Mute
+    status: 144
+    channel: 0
+    data1: 4
+  - name: Erase
+    status: 144
+    channel: 0
+    data1: 9
+  - name: Note Repeat
+    status: 144
+    channel: 0
+    data1: 11
+  - name: Quantize
+    status: 144
+    channel: 0
+    data1: 12
+  - name: Track Select
+    status: 144
+    channel: 0
+    data1: 13
+  - name: Program Select
+    status: 144
+    channel: 0
+    data1: 14
+  - name: TC ON/OFF
+    status: 144
+    channel: 0
+    data1: 15
+  - name: Sample Start
+    status: 144
+    channel: 0
+    data1: 33
+  - name: Sample End
+    status: 144
+    channel: 0
+    data1: 34
+  - name: Pad Bank A/E
+    status: 144
+    channel: 0
+    data1: 35
+  - name: Pad Bank B/F
+    status: 144
+    channel: 0
+    data1: 36
+  - name: Pad Bank C/G
+    status: 144
+    channel: 0
+    data1: 37
+  - name: Pad Bank D/H
+    status: 144
+    channel: 0
+    data1: 38
+  - name: Full Level
+    status: 144
+    channel: 0
+    data1: 39
+  - name: 16 Level
+    status: 144
+    channel: 0
+    data1: 40
+  - name: Sample Select
+    status: 144
+    channel: 0
+    data1: 42
+  - name: Shift
+    status: 144
+    channel: 0
+    data1: 49
+  - name: Browse
+    status: 144
+    channel: 0
+    data1: 50
+  - name: Main
+    status: 144
+    channel: 0
+    data1: 52
+  - name: Tap Tempo
+    status: 144
+    channel: 0
+    data1: 53
+  - name: +
+    status: 144
+    channel: 0
+    data1: 54
+  - name: "-"
+    status: 144
+    channel: 0
+    data1: 55
+  - name: Zoom
+    status: 144
+    channel: 0
+    data1: 66
+  - name: Undo
+    status: 144
+    channel: 0
+    data1: 67
+  - name: <
+    status: 144
+    channel: 0
+    data1: 68
+  - name: ">"
+    status: 144
+    channel: 0
+    data1: 69
+  - name: Locate
+    status: 144
+    channel: 0
+    data1: 70
+  - name: "<<"
+    status: 144
+    channel: 0
+    data1: 71
+  - name: ">>"
+    status: 144
+    channel: 0
+    data1: 72
+  - name: Record
+    status: 144
+    channel: 0
+    data1: 73
+  - name: Automation READ/Write
+    status: 144
+    channel: 0
+    data1: 75
+  - name: Tune
+    status: 144
+    channel: 0
+    data1: 79
+  - name: Overdub
+    status: 144
+    channel: 0
+    data1: 80
+  - name: Stop
+    status: 144
+    channel: 0
+    data1: 81
+  - name: Play
+    status: 144
+    channel: 0
+    data1: 82
+  - name: Play Start
+    status: 144
+    channel: 0
+    data1: 83
+  - name: JOG Wheel
+    status: 176
+    channel: 0
+    data1: 100
+  - name: Mode
+    status: 144
+    channel: 0
+    data1: 1
+  - name: Copy
+    status: 144
+    channel: 0
+    data1: 122
+  - name: Pad1
+    status: 144
+    channel: 9
+    data1: 37
+  - name: Pad2
+    status: 144
+    channel: 9
+    data1: 36
+  - name: Pad3
+    status: 144
+    channel: 9
+    data1: 42
+  - name: Pad4
+    status: 144
+    channel: 9
+    data1: 82
+  - name: Pad5
+    status: 144
+    channel: 9
+    data1: 40
+  - name: Pad6
+    status: 144
+    channel: 9
+    data1: 38
+  - name: Pad7
+    status: 144
+    channel: 9
+    data1: 46
+  - name: Pad8
+    status: 144
+    channel: 9
+    data1: 44
+  - name: Pad9
+    status: 144
+    channel: 9
+    data1: 48
+  - name: Pad10
+    status: 144
+    channel: 9
+    data1: 47
+  - name: Pad11
+    status: 144
+    channel: 9
+    data1: 45
+  - name: Pad12
+    status: 144
+    channel: 9
+    data1: 43
+  - name: Pad13
+    status: 144
+    channel: 9
+    data1: 49
+  - name: Pad14
+    status: 144
+    channel: 9
+    data1: 55
+  - name: Pad15
+    status: 144
+    channel: 9
+    data1: 51
+  - name: Pad16
+    status: 144
+    channel: 9
+    data1: 53
