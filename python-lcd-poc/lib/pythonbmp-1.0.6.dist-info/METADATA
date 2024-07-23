@@ -1,0 +1,81 @@
+Metadata-Version: 2.1
+Name: pythonbmp
+Version: 1.0.6
+Summary: A pure Python 2D/3D graphics library that outputs to windows bitmap format
+Author-email: Joel Alcarez <joelalcarez1975@gmail.com>
+License: MIT License
+        
+        Copyright (c) 2022 TechnoTanuki
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+        
+Project-URL: homepage, https://github.com/TechnoTanuki/Python_BMP
+Project-URL: documentation, https://github.com/TechnoTanuki/Python_BMP/blob/main/docs/Hello_Graphics.md
+Project-URL: repository, https://github.com/TechnoTanuki/Python_BMP
+Project-URL: Bug Tracker, https://github.com/TechnoTanuki/Python_BMP/issues
+Classifier: Development Status :: 4 - Beta
+Classifier: Programming Language :: Python
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
+[![AppID](https://github.com/TechnoTanuki/Python_BMP/blob/main/docs/Hello_GithubID.png)](https://github.com/TechnoTanuki/Python_BMP/blob/main/samples/Hello_APP_Github_ID.py)
+___________
+# pythonbmp
+___________
+A pure Python 2D/3D graphics library that outputs to windows bitmap format
+* Developed and tested using Python 3.8 / 3.10.4 / 3.11
+* No dependencies required
+
+* ![API Reference](https://github.com/TechnoTanuki/Python_BMP/blob/main/docs/BitmapLib_Doc.md)
+
+# Instructions
+
+Run Hello_somestring_here.py
+
+This will show minimum code to accomplish certain tasks
+
+* ![Hello_Darkness.py](https://github.com/TechnoTanuki/Python_BMP/blob/main/samples/Hello_Darkness.py) (my old friend) is a minimum template
+
+Run ![Features_Speedtest.py](https://github.com/TechnoTanuki/Python_BMP/blob/main/samples/Features_Speedtest.py)
+
+* It should generate a bitmap and open MS Paint under windows to show output...
+* Close the MS Paint window to execute another script
+
+# Unit tests (images are links to test)
+
+[![Picmanip](https://github.com/TechnoTanuki/Python_BMP/blob/main/tests/assets/test_images/raccoon-flipXYcircregion.bmp)](https://github.com/TechnoTanuki/Python_BMP/blob/main/tests/test_picturemanipulation.py)
+
+[![Fractals](https://github.com/TechnoTanuki/Python_BMP/blob/main/tests/assets/fractals/multijulia.bmp)](https://github.com/TechnoTanuki/Python_BMP/blob/main/tests/test_fractals.py)
+
+[![Text](https://github.com/TechnoTanuki/Python_BMP/blob/main/tests/assets/fonts/8x8x4px1cs024bitplotitalicstring2filebc0cmulti.bmp)](https://github.com/TechnoTanuki/Python_BMP/blob/main/tests/test_fonts.py)
+
+* Will generate images (one per function under test) then compare it with previously generated images generated with the function under test (this might take a while)
+
+
+# Moar docs
+
+* ![Hello Graphics](https://github.com/TechnoTanuki/Python_BMP/blob/main/docs/Hello_Graphics.md)
+
+* ![Hello Text](https://github.com/TechnoTanuki/Python_BMP/blob/main/docs/Hello_Text.md)
+
+* ![Hello Fractals](https://github.com/TechnoTanuki/Python_BMP/blob/main/docs/Hello_Fractals.md)
+
+* ![Hello Image Processing](https://github.com/TechnoTanuki/Python_BMP/blob/main/docs/Hello_Image_Processing.md)
+
